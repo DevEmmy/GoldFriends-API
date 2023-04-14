@@ -7,7 +7,7 @@ const property = new Schema({
     location: String,
     isAvailable: {type: Boolean, default: true},
     description: {type: String},
-    price: {type: Number},
+    videos: [{type: String}],
 },{
     timestamps: true
 })

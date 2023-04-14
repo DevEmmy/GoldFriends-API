@@ -5,7 +5,7 @@ const router = require("express").Router()
 
 router.get("/all", getAllProperties)
 router.get("/:id", getAProperty)
-router.post("/", requiredLogin, createAList)
+router.post("/", createAList)
 router.delete("/:id", deleteAList)
 router.patch("/id", requiredLogin, updateAProperty)
 

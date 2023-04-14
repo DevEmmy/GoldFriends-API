@@ -1,7 +1,7 @@
 const Property = require("../models/property.models")
 
-const getAllProperties = (req, res)=>{
-    Property.find()
+const getAllProperties = async (req, res)=>{
+    await Property.find()
     .then(resp => res.json(resp))
     .catch(err => res.json(err))
 }
@@ -13,9 +13,9 @@ const getAProperty = (req, res)=>{
     .catch(err => res.json(err))
 }
 
-const createAList = (req, res)=>{
+const createAList = async (req, res)=>{
     const details = req.body
-    new Property(details).save()
+    await new Property(details).save()
     .then(resp => res.json({
         message: "Successful",
         property: resp
@@ -27,9 +27,9 @@ const createAList = (req, res)=>{
     ))
 }
 
-const deleteAList = (req, res)=>{
+const deleteAList = async (req, res)=>{
     const {id} = req.params;
-    Property.findByIdAndDelete(id)
+    await Property.findByIdAndDelete(id)
     .then(resp => res.json({
         message:"Property Deleted Successfully"
     }))
