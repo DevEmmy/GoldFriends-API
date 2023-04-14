@@ -1,4 +1,5 @@
-const Property = require("../models/property.models")
+const Property = require("../models/property.models");
+const { upload } = require("./cloudinary");
 
 const getAllProperties = async (req, res)=>{
     await Property.find()
@@ -15,6 +16,13 @@ const getAProperty = (req, res)=>{
 
 const createAList = async (req, res)=>{
     const details = req.body
+    details.images.length > 0 && (details.images = await upload(details.images))
+    details.videos.length > 0 && 
+    (details.videos = await upload(details.videos, {
+        resource_type: "video",
+        format: "mp4"
+    }))
+    
     await new Property(details).save()
     .then(resp => res.json({
         message: "Successful",

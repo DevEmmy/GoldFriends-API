@@ -1,4 +1,5 @@
 const Visa = require("../models/availableVisa")
+const { upload } = require("./cloudinary")
 
 const getAll = async (req, res)=>{
     try{
@@ -13,6 +14,8 @@ const getAll = async (req, res)=>{
 const createVisa = async (req, res)=>{
     try{
         let content = req.body;
+        let image = await upload(content.image)
+        content.image = image[0]
         let result = new Visa(content)
         result = await result.save()
         res.json(result)

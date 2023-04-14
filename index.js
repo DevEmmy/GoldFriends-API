@@ -20,9 +20,9 @@ app.use(
 )
 
 const port = process.env.PORT || 9099
-const uri = process.env.DB_URI 
+const uri =  "mongodb://127.0.0.1:27017/gf"
 
-// "mongodb://127.0.0.1:27017/gf"
+// process.env.DB_URI
 // connect mongodb
 mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 
