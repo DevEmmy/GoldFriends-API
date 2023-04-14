@@ -14,8 +14,10 @@ const getAll = async (req, res)=>{
 const createVisa = async (req, res)=>{
     try{
         let content = req.body;
-        let image = await upload(content.image)
-        content.image = image[0]
+        if(content.image && content.image.length > 0){
+            let image = await upload(content.image)
+            content.image = image[0]
+        }
         let result = new Visa(content)
         result = await result.save()
         res.json(result)
