@@ -16,11 +16,13 @@ const getAProperty = (req, res)=>{
 
 const createAList = async (req, res)=>{
     const details = req.body
-    details.images.length > 0 && (details.images = await upload(details.images))
+    details.images.length > 0 && (details.images = await upload(details.images), { timeout: 300000, quality: 80 })
     details.videos.length > 0 && 
     (details.videos = await upload(details.videos, {
         resource_type: "video",
-        format: "mp4"
+        format: "mp4",
+        timeout: 300000,
+        quality: 60
     }))
     
     await new Property(details).save()
